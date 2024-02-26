@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Interval Calculator</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1>Date Calculator</h1>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="start_date">Start Date:</label>
+        <input type="date" class="form-control" id="start_date">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="end_date">End Date:</label>
+        <input type="date" class="form-control" id="end_date">
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <button type="button" class="btn btn-primary" id="calculate_btn">Calculate</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <div id="result"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#calculate_btn").click(function(){
+    var startDate = new Date($("#start_date").val());
+    var endDate = new Date($("#end_date").val());
+
+    // Calculate the difference in milliseconds
+    var differenceMs = Math.abs(endDate - startDate);
+
+    // Convert milliseconds to days
+    var differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
+    // Convert days to years, months, weeks, and days
+    var years = Math.floor(differenceDays / 365);
+    var months = Math.floor((differenceDays % 365) / 30);
+    var weeks = Math.floor((differenceDays % 365) % 30 / 7);
+    var days = (differenceDays % 365) % 30 % 7;
+
+    // Display the total result
+    $("#result").html("Total interval between the two dates is: " + years + " years, " + months + " months, " + weeks + " weeks, and " + days + " days.");
+
+    // Log the total result to the console for clarity
+    console.log("Total Years: " + years);
+    console.log("Total Months: " + months);
+    console.log("Total Weeks: " + weeks);
+    console.log("Total Days: " + days);
+  });
+});
+</script>
+
+</body>
+</html>
